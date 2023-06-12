@@ -39,12 +39,12 @@ function goToIncludedFile() {
           const workspaceFolderPath = workspaceFolder.uri.fsPath;
           const filePath = path.join(workspaceFolderPath, "src", "html", includePath);
 
-          // Предложение перейти в файл при нажатии на Ctrl + Левый клик
-          vscode.window.showInformationMessage("Перейти в файл?", "Да").then((selection) => {
-            if (selection === "Да") {
-              // Выполнение команды открытия файла
-              vscode.commands.executeCommand("vscode.open", vscode.Uri.file(filePath));
-            }
+          // Открываем документ и прокручиваем до соответствующей строки с выделением всей строки
+          vscode.workspace.openTextDocument(vscode.Uri.file(filePath)).then((doc) => {
+            const lineNumber = doc.getText().indexOf(line.text);
+            const range = new vscode.Range(lineNumber, 0, lineNumber, line.text.length);
+            activeEditor.revealRange(range, vscode.TextEditorRevealType.Default);
+            activeEditor.selection = new vscode.Selection(range.start, range.end);
           });
         }
       }
@@ -60,5 +60,13 @@ function activate(context) {
   context.subscriptions.push(
     vscode.languages.registerDefinitionProvider({ scheme: "file", language: "html" }, new IncludeDefinitionProvider())
   );
+
+  // Выполняем переход по контрл + лкм при открытии файла
+  vscode.window.onDidChangeActiveTextEditor(() => {
+    const activeEditor = vscode.window.activeTextEditor;
+    if (activeEditor && (activeEditor.document.languageId === "html" || activeEditor.document.languageId === "htm")) {
+      goToIncludedFile();
+    }
+  });
 }
 exports.activate = activate;
