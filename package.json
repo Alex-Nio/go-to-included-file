@@ -1,0 +1,40 @@
+{
+  "name": "go-to-included-file",
+  "version": "1.0.0",
+  "publisher": "Alex Nio",
+  "description": "Go to included file plugin",
+  "main": "index.js",
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "echo \"No build step required\"",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "vscode": "^1.4.0"
+  },
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.goToIncludedFile"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.goToIncludedFile",
+        "title": "Go to Included File"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alex-Nio/go-to-included-file.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Alex-Nio/go-to-included-file/issues"
+  },
+  "homepage": "https://github.com/Alex-Nio/go-to-included-file"
+}
