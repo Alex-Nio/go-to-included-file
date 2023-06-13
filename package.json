@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "publisher": "AlexNio",
   "description": "Go to included file plugin",
+  "icon": "images/icon.png",
   "main": "index.js",
   "scripts": {
     "vscode:prepublish": "npm run build",
