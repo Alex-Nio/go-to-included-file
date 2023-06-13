@@ -1,7 +1,7 @@
 {
   "name": "go-to-included-file",
   "version": "1.0.0",
-  "publisher": "Alex Nio",
+  "publisher": "AlexNio",
   "description": "Go to included file plugin",
   "main": "index.js",
   "scripts": {
